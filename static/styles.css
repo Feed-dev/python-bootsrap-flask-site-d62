@@ -1,9 +1,7 @@
-/* This CSS file will need to be added to the styling of 
-your web pages for the styles to be rendered. */
-
 body {
-background-color: #333;
-color: white;
+    background-color: #333;
+    color: white;
+    font-family: Arial, sans-serif; /* Example font */
 }
 
 a {
@@ -11,15 +9,23 @@ a {
 }
 
 .jumbotron {
-  display: flex;
-  align-items: center;
-  margin: 0;
-  height: 100vh;
-  color: white;
-  background-color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    height: 100vh;
+    color: white;
+    background-color: #333;
+    padding-left: 150px;
+    padding-right: 150px;
 }
 
 .space-above {
     margin-top: 20px;
     padding-top: 20px;
+}
+
+.table {
+    background-color: #444; /* Slightly lighter to distinguish from background */
 }
