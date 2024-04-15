@@ -26,13 +26,37 @@ def home():
     return render_template("index.html")
 
 
+def emoji_rating(rating, type):
+    if type == "coffee":
+        emoji = '☕'
+    elif type == "wifi":
+        emoji = '💪'
+    else:  # power outlets
+        emoji = '🔌'
+
+    return emoji * int(rating)
+
+
 @app.route('/add', methods=['GET', 'POST'])
 def add_cafe():
     form = CafeForm()
     if form.validate_on_submit():
+        # Convert ratings to emoji strings
+        coffee_emojis = emoji_rating(form.coffee_rating.data, "coffee")
+        wifi_emojis = emoji_rating(form.wifi_rating.data, "wifi")
+        power_emojis = emoji_rating(form.power_outlet_rating.data, "power")
+
         with open('cafe-data.csv', mode='a', newline='', encoding='utf-8') as csv_file:
             csv_writer = csv.writer(csv_file, delimiter=',')
-            csv_writer.writerow([form.cafe.data, form.location_url.data, form.open_time.data, form.close_time.data, form.coffee_rating.data, form.wifi_rating.data, form.power_outlet_rating.data])
+            csv_writer.writerow([
+                form.cafe.data,
+                form.location_url.data,
+                form.open_time.data,
+                form.close_time.data,
+                coffee_emojis,
+                wifi_emojis,
+                power_emojis
+            ])
         return redirect(url_for('cafes'))
     return render_template('add.html', form=form)
 
